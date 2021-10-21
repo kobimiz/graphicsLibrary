@@ -5,6 +5,8 @@
 
 #include "geometry.h"
  
+namespace GuiElements {
+
 class Text {
 public:
     std::string str;
@@ -15,5 +17,7 @@ public:
     Text(std::string&& str, Geometry::Color&& color, float scale);
     void draw(const Geometry::Point& topLeft);
 };
+
+}; // namespace GuiElements
 
 #endif

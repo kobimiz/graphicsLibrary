@@ -7,6 +7,8 @@
 #include "grid.h"
 #include "lineBreak.h"
 
+namespace GuiElements {
+
 Window::Window() {
     body = new Container(Geometry::Point(0.0f, 0.0f), Geometry::Rectangle::screenWidth, Geometry::Rectangle::screenHeight);
 }
@@ -121,3 +123,5 @@ void Window::fromDoc(std::string&& docPath) {
 void Window::deleteChildren() {
 	Window::deleteChildren(this->body);
 }
+
+}; // namespace GuiElements

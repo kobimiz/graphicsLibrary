@@ -4,8 +4,11 @@
 #include <string>
 
 #include "events.h"
+#include "event.h"
 #include "geometry.h"
 #include "text.h"
+
+namespace GuiElements {
 
 class Element {
 private:
@@ -38,5 +41,7 @@ public:
     // NOTE: does not automatically update, just sets automatically on construction
     static const int AUTO;
 };
+
+}; // namespace GuiElements
 
 #endif

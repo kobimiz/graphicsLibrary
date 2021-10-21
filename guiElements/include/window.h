@@ -5,7 +5,8 @@
 
 #include "container.h"
 
-// TODO this
+namespace GuiElements {
+
 class Window {
 private:
     static Element* getElement(tinyxml2::XMLElement* elem);
@@ -20,5 +21,7 @@ public:
     void fromDoc(std::string&& docPath);
     void deleteChildren();
 };
+
+}; // namespace GuiElements
 
 #endif

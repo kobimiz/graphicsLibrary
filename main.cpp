@@ -13,30 +13,21 @@
 #include <vector>
 #include <string>
 
-#include "element.h"
 #include "geometry.h"
-#include "button.h"
-#include "input.h"
-#include "lineBreak.h"
-#include "text.h"
-#include "checkbox.h"
-#include "container.h"
+#include "guiElements.h"
 #include "glfwHandlers.h"
-#include "grid.h"
 
-#include "window.h"
-
-Window* w;
+GuiElements::Window* w;
 
 void reParse(std::string&& docPath) {
-	Element::mouseIsIn = nullptr;
-	Input::active = nullptr;
-	Input::active = nullptr;
+	GuiElements::Element::mouseIsIn = nullptr;
+	GuiElements::Input::active = nullptr;
+	GuiElements::Input::active = nullptr;
 	w->deleteChildren();
 	w->fromDoc(std::move(docPath));
 }
 
-void reParseClick(Element* elem, Event* e){
+void reParseClick(GuiElements::Element* elem, Event* e){
 	std::cout << "reparsing\n";
 
 	reParse("document.xml");
@@ -77,12 +68,12 @@ int main(int argc, const char** args) {
 
 	Geometry::Rectangle::init();
 	Geometry::Line::init();
-	LineBreak::init();
+	GuiElements::LineBreak::init();
 	Geometry::Circle::init();
 	Geometry::Utility::initFreeType();
 	// finished init
 	
-	w = new Window();
+	w = new GuiElements::Window();
 	glfwSetWindowUserPointer(window, w);
 	w->fromDoc("document.xml");
 
@@ -111,7 +102,7 @@ int main(int argc, const char** args) {
 	Geometry::Rectangle::destroy();
 	Geometry::Line::destroy();
 	Geometry::Circle::destroy();
-	LineBreak::destroy();
+	GuiElements::LineBreak::destroy();
 	delete Geometry::Utility::textShader;
 	delete window;
 

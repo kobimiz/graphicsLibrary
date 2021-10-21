@@ -9,6 +9,8 @@
 class Rectangle;
 class Event;
 
+namespace GuiElements {
+
 class Graph : public Element {
 private:
     // std::vector<Func> funcs;
@@ -21,5 +23,7 @@ public:
 
     static void drawCurve(std::vector<Geometry::Point>& curve);
 };
+
+}; // namespace GuiElements
 
 #endif

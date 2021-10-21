@@ -4,6 +4,8 @@
 #include "geometry.h"
 #include "lineBreak.h"
 
+namespace GuiElements {
+
 Container::Container() : Element(Geometry::Rectangle()) {};
 
 Container::Container(Geometry::Point&& topLeft, int width, int height) : Element(Geometry::Rectangle(topLeft, width, height)) { }
@@ -121,3 +123,5 @@ void Container::forEachChild(void (*func)(Element*, void*), void* args) {
             ((Container*)element)->forEachChild(func, args);
     }
 }
+
+}; // namespace GuiElements

@@ -3,6 +3,8 @@
 
 #include "element.h"
 
+namespace GuiElements {
+
 class Checkbox : public Element {
 public:
     bool isChecked;
@@ -12,5 +14,7 @@ public:
 
     static void defaultClick(Element* element, Event* args);
 };
+
+}; // namespace GuiElements
 
 #endif

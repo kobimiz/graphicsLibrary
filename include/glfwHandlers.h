@@ -24,19 +24,19 @@ namespace handlers {
     };
     void cursorPositionCallback(GLFWwindow* window, double xpos, double ypos) {
         bool found = false;
-        Window* w = (Window*)glfwGetWindowUserPointer(window);
+        GuiElements::Window* w = (GuiElements::Window*)glfwGetWindowUserPointer(window);
         PosCallbackArgs args = {
             xpos, ypos, window, &found
         };
-        w->body->forEachChild([](Element* element, void* args){
+        w->body->forEachChild([](GuiElements::Element* element, void* args){
             PosCallbackArgs* argsTyped = (PosCallbackArgs*)args;
 
             if(element->rect.isInRange(argsTyped->xpos, argsTyped->ypos)) {
-                if(element != Element::mouseIsIn) {
+                if(element != GuiElements::Element::mouseIsIn) {
                     element->rect.mouseIn();
-                    if(Element::mouseIsIn != nullptr)
-                        Element::mouseIsIn->rect.mouseOut();
-                    Element::mouseIsIn = element;
+                    if(GuiElements::Element::mouseIsIn != nullptr)
+                        GuiElements::Element::mouseIsIn->rect.mouseOut();
+                    GuiElements::Element::mouseIsIn = element;
                 }
                 *argsTyped->found = true;
                 glfwSetCursor(argsTyped->window, handCursor);
@@ -46,9 +46,9 @@ namespace handlers {
         if(!found) {
             // TODO: set normal cursor here and pointer above
             //glfwSetCursor(window, GLFWCursor);
-            if(Element::mouseIsIn != nullptr)
-                Element::mouseIsIn->rect.mouseOut();
-            Element::mouseIsIn = nullptr;
+            if(GuiElements::Element::mouseIsIn != nullptr)
+                GuiElements::Element::mouseIsIn->rect.mouseOut();
+            GuiElements::Element::mouseIsIn = nullptr;
             glfwSetCursor(window, standardCursor);
         }
     }
@@ -59,9 +59,9 @@ namespace handlers {
             glfwTerminate();
             exit(0);
         } else if (action == GLFW_PRESS || action == GLFW_REPEAT) // and not release
-            if (Input::active != nullptr)
-                if (key == GLFW_KEY_BACKSPACE && !Input::active->text.str.empty())
-                    Input::active->popChar();
+            if (GuiElements::Input::active != nullptr)
+                if (key == GLFW_KEY_BACKSPACE && !GuiElements::Input::active->text.str.empty())
+                    GuiElements::Input::active->popChar();
     }
 
     void mouseButtonCallback(GLFWwindow* window, int button, int action, int mods) {
@@ -70,24 +70,24 @@ namespace handlers {
         if (button == GLFW_MOUSE_BUTTON_LEFT && action == GLFW_PRESS) {
             // TODO add a "body" element that has its own click listner that loses focus from inputs instead of this
             bool clicked = false;
-            Window* w = (Window*)glfwGetWindowUserPointer(window);
+            GuiElements::Window* w = (GuiElements::Window*)glfwGetWindowUserPointer(window);
             MouseButtonCallbackArgs args = {
                 xpos, ypos, &clicked
             };
-            w->body->forEachChild([](Element* element, void* args){
+            w->body->forEachChild([](GuiElements::Element* element, void* args){
                 MouseButtonCallbackArgs* argsTyped = (MouseButtonCallbackArgs*)args;
                 if(element->rect.isInRange(argsTyped->xpos, argsTyped->ypos)) {
                     element->click(nullptr);
                     // TODO think of a better way to detect if click was on an input
                     try {
-                        Input* i = (Input*) element;
+                        GuiElements::Input* i = (GuiElements::Input*) element;
                         *argsTyped->clicked = true;
                     } catch(const std::exception& e) {}
                 }
             }, &args);
             if (!clicked)
-                if (Input::active != nullptr)
-                    Input::active->loseFocus();
+                if (GuiElements::Input::active != nullptr)
+                    GuiElements::Input::active->loseFocus();
         }
     }
     void window_resize_callback(GLFWwindow* window, int width, int height) {
@@ -95,8 +95,8 @@ namespace handlers {
         // TODO fix clicking on inputs and hovering when resizing window
     }
     void character_callback(GLFWwindow* window, unsigned int codepoint) {
-        if (Input::active != nullptr)
-            Input::active->pushChar((char) codepoint);
+        if (GuiElements::Input::active != nullptr)
+            GuiElements::Input::active->pushChar((char) codepoint);
     }
 
     void APIENTRY glDebugOutput(GLenum source, 

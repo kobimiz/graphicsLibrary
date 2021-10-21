@@ -3,6 +3,8 @@
 
 #include "element.h"
 
+namespace GuiElements {
+
 class LineBreak : public Element {
 private:
     LineBreak();
@@ -14,5 +16,7 @@ public:
 
     virtual void draw() override;
 };
+
+}; // namespace GuiElements
 
 #endif

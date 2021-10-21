@@ -8,11 +8,13 @@ extern "C" double glfwGetTime();
 
 #include <iostream>
 // define static members
-Input* Input::active;
+GuiElements::Input* GuiElements::Input::active;
 float colors[] = {
 	0.3f, 0.3f, 0.3f
 };
-Geometry::Line Input::blinker(Geometry::Point(0,0),Geometry::Point(0,0), colors, 1);
+Geometry::Line GuiElements::Input::blinker(Geometry::Point(0,0),Geometry::Point(0,0), colors, 1);
+
+namespace GuiElements {
 
 Input::Input() : Element(Geometry::Rectangle()) {
     // TODO think of a better solution. maybe with std::functional and lambdas
@@ -83,3 +85,5 @@ void Input::defaultClick(Element* owningObject, Event* event) {
         Input* temp = (Input*)owningObject;
         temp->focus();
 }
+
+}; // namespace GuiElements

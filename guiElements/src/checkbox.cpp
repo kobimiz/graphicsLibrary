@@ -4,6 +4,8 @@
 
 #include "glm/glm.hpp"
 
+namespace GuiElements {
+
 Checkbox::Checkbox(const Geometry::Point&& topLeft, int width, int height, bool isChecked) : Element(Geometry::Rectangle(topLeft, width, height)){
 	this->isChecked = isChecked;
     eventListeners.addEventListener("click", Checkbox::defaultClick);
@@ -25,3 +27,5 @@ void Checkbox::defaultClick(Element* element, Event* args) {
     cb->isChecked = !cb->isChecked;
     // TODO clean this
 }
+
+}; // namespace GuiElements

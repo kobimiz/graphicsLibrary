@@ -4,6 +4,8 @@
 #include "container.h"
 #include <vector>
 
+namespace GuiElements {
+
 class Grid : public Container {
 private:
     int currentRowEndX,
@@ -17,5 +19,7 @@ public:
     Grid();
     virtual void addAutoArrange(Element* element) override;
 };
+
+}; // namespace GuiElements
 
 #endif

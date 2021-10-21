@@ -6,6 +6,8 @@
 
 class Geometry::Rectangle;
 
+namespace GuiElements {
+
 class Button : public Element {
 public:
 	Button();
@@ -13,5 +15,7 @@ public:
 
 	void draw() override;
 };
+
+}; // namespace GuiElements
 
 #endif

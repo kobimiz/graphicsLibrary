@@ -4,8 +4,10 @@
 
 class Event;
 
-Element* Element::mouseIsIn;
-const int Element::AUTO = -1;
+GuiElements::Element* GuiElements::Element::mouseIsIn;
+const int GuiElements::Element::AUTO = -1;
+
+namespace GuiElements {
 
 Element::Element(Geometry::Rectangle& rect) : eventListeners(), rect(rect) {
     isDisabled = false;
@@ -59,3 +61,5 @@ void Element::calculateHeight() {
     // TODO: this, based on rows
     rect.height = 70;
 }
+
+}; // namespace GuiElements

@@ -6,6 +6,8 @@
 #include "element.h"
 #include "geometry.h"
 
+namespace GuiElements {
+
 class Input : public Element {
 private:
 	float textWidth;
@@ -29,5 +31,7 @@ public:
 	static void defaultClick(Element* owningObject, Event* event);
 	static void defaultBlur(Element* owningObject, Event* event);
 };
+
+}; // namespace GuiElements
 
 #endif

@@ -1,6 +1,8 @@
 #include "lineBreak.h"
 
-LineBreak* LineBreak::br;
+GuiElements::LineBreak* GuiElements::LineBreak::br;
+
+namespace GuiElements {
 
 LineBreak::LineBreak() : Element(Geometry::Rectangle()) { }
 
@@ -21,3 +23,5 @@ LineBreak* LineBreak::getInstance() {
 void LineBreak::draw() {
     
 }
+
+}; // namespace GuiElements

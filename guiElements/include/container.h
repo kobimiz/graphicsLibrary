@@ -6,6 +6,8 @@
 
 #include "element.h"
 
+namespace GuiElements {
+
 class Container : public Element {
 public:
     std::vector<Element*> elements;
@@ -26,5 +28,7 @@ public:
 
     void forEachChild(void (*func)(Element*, void*), void* args);
 };
+
+}; // namespace GuiElements
 
 #endif

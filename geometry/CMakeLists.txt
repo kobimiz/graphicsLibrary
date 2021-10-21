@@ -27,6 +27,7 @@ target_link_libraries(geometry ${GLEW_LIB} ${FREETYPE_LIB} ${OPENGL_LIB} graphic
 target_include_directories(geometry PUBLIC
     ${CMAKE_SOURCE_DIR}/include
     ${CMAKE_SOURCE_DIR}/geometry/include
+    ${CMAKE_SOURCE_DIR}/guiElements/include
     ~/Desktop/graphicsMath/headers
     /usr/include/freetype2
     /usr/include/GL)

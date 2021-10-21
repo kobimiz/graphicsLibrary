@@ -6,6 +6,8 @@ int max(int x, int y) {
     return y;
 }
 
+namespace GuiElements {
+
 Grid::Grid() : Container(), rowCount(0) { }
 
 void Grid::addAutoArrange(Element* element) {
@@ -44,3 +46,5 @@ void Grid::addAutoArrange(Element* element) {
 
     add(element);
 }
+
+}; // namespace GuiElements

@@ -3,8 +3,8 @@
 #include "events.h"
 
 Events::Events(): owningObject(nullptr) { }
-Events::Events(Element* owningObject): owningObject(owningObject) { }
-Events::Events(Element* owningObject, const char*  eventName, eventAction action):owningObject(owningObject) {
+Events::Events(GuiElements::Element* owningObject): owningObject(owningObject) { }
+Events::Events(GuiElements::Element* owningObject, const char*  eventName, eventAction action):owningObject(owningObject) {
     addEventListener(eventName, action);
 }
 
@@ -21,6 +21,6 @@ void Events::dispatch(const char* eventName, Event* args) {
         action(owningObject, args);
 }
 
-void Events::updateOwningObject(Element* updated) {
+void Events::updateOwningObject(GuiElements::Element* updated) {
     owningObject = updated;
 }
