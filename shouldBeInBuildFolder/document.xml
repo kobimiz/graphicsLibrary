@@ -1,9 +1,0 @@
-<grid height="100" width="1000" color="0.122,0.600,0.361">
-    <grid>Menu</grid>
-    <button id="helloContainer" color="0.322,0.400,0.861">Click me</button>
-</grid>
-<grid height="700" width="1000" color="0.345,0.122,0.600">
-    <grid>hello world</grid>
-    <br></br>
-    <input height="70" width="200"></input>
-</grid>
