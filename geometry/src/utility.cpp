@@ -13,9 +13,11 @@
 #include "rectangle.h"
 #include "shader.h"
 
-std::map<char, Character> Utility::characters;
-unsigned int Utility::textVao, Utility::textVbo;
-Shader* Utility::textShader;
+std::map<char, Geometry::Character> Geometry::Utility::characters;
+unsigned int Geometry::Utility::textVao, Geometry::Utility::textVbo;
+Geometry::Shader* Geometry::Utility::textShader;
+
+namespace Geometry {
 
 namespace Utility {
     void initFreeType() {
@@ -133,3 +135,5 @@ namespace Utility {
         }
     }
 }
+
+}; // namespace Geometry

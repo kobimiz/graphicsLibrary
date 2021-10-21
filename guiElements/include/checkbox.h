@@ -6,7 +6,7 @@
 class Checkbox : public Element {
 public:
     bool isChecked;
-    Checkbox(const Point&& topLeft, int width, int height, bool isChecked = false);
+    Checkbox(const Geometry::Point&& topLeft, int width, int height, bool isChecked = false);
 
     void draw();
 

@@ -1,12 +1,12 @@
 #include "../include/container.h"
 
 #include <algorithm>
-#include "rectangle.h"
+#include "geometry.h"
 #include "lineBreak.h"
 
-Container::Container() : Element(Rectangle()) {};
+Container::Container() : Element(Geometry::Rectangle()) {};
 
-Container::Container(Point&& topLeft, int width, int height) : Element(Rectangle(topLeft, width, height)) { }
+Container::Container(Geometry::Point&& topLeft, int width, int height) : Element(Geometry::Rectangle(topLeft, width, height)) { }
 
 void Container::add(Element* element) {
     if (element->id != "") {
@@ -61,9 +61,9 @@ void Container::autoArrange() {
             continue;
         }
         float elemRight = elem->rect.getX() + elem->rect.width;
-        if (elemRight > Rectangle::screenWidth) {
+        if (elemRight > Geometry::Rectangle::screenWidth) {
             // check if can move to next row
-            if (elem->rect.width > Rectangle::screenWidth) {
+            if (elem->rect.width > Geometry::Rectangle::screenWidth) {
                 // overflow x
                 x = 0.0f;
                 yStart += elem->rect.height;

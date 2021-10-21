@@ -16,6 +16,8 @@ void readFileToString(std::string& str, std::ifstream& file) {
 				std::istreambuf_iterator<char>());
 }
 
+namespace Geometry {
+
 Shader::Shader(): id(glCreateProgram()) {}
 Shader::Shader(const GLchar* vertexName,const GLchar* fragmentName): id(glCreateProgram()) {
 	this->useShader(vertexName  , GL_VERTEX_SHADER  );
@@ -87,3 +89,5 @@ void Shader::setVec2 (const char* name, float* vec2    ) const {
 void Shader::setVec3 (const char* name, float* vec3    ) const {
 	glUniform3fv(glGetUniformLocation(this->id, name), 1, vec3);
 }
+
+}; // namespace Geometry

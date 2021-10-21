@@ -7,7 +7,7 @@ class Event;
 Element* Element::mouseIsIn;
 const int Element::AUTO = -1;
 
-Element::Element(Rectangle& rect) : eventListeners(), rect(rect) {
+Element::Element(Geometry::Rectangle& rect) : eventListeners(), rect(rect) {
     isDisabled = false;
     isVisible  = true;
     eventListeners.updateOwningObject(this);
@@ -18,7 +18,7 @@ Element::Element(Rectangle& rect) : eventListeners(), rect(rect) {
 
 }
 
-Element::Element(const Rectangle&& rect) : eventListeners(), rect(rect) {
+Element::Element(const Geometry::Rectangle&& rect) : eventListeners(), rect(rect) {
     isDisabled = false;
     isVisible  = true;
     eventListeners.updateOwningObject(this);
@@ -32,7 +32,7 @@ void Element::draw() {
     if (isVisible) {
         rect.draw();
         if (text.str != "") {
-            Point topLeft = rect.getXY();
+            Geometry::Point topLeft = rect.getXY();
             topLeft.x += 10 * text.scale;
             topLeft.y += (rect.height + 35 * text.scale) / 2.0f; // align to center
             text.draw(topLeft);
@@ -50,7 +50,7 @@ bool Element::isContainer() {
 
 void Element::calculateWidth() {
     rect.width = std::accumulate(text.str.begin(), text.str.end(), 0, [](int sum, char c) {
-        auto ch = Utility::characters[c];
+        auto ch = Geometry::Utility::characters[c];
         return sum + 0.5f * ch.size.x + 2 * ch.bearing.x;
     });
 }

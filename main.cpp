@@ -14,13 +14,9 @@
 #include <string>
 
 #include "element.h"
-#include "shader.h"
-#include "rectangle.h"
-#include "circle.h"
+#include "geometry.h"
 #include "button.h"
-#include "utility.h"
 #include "input.h"
-#include "line.h"
 #include "lineBreak.h"
 #include "text.h"
 #include "checkbox.h"
@@ -48,15 +44,15 @@ void reParseClick(Element* elem, Event* e){
 }
 
 int main(int argc, const char** args) {
-	Utility::initGLFW();
+	Geometry::Utility::initGLFW();
 	glfwWindowHint(GLFW_OPENGL_DEBUG_CONTEXT, true);
 
-	GLFWwindow* window = glfwCreateWindow(Rectangle::screenWidth, Rectangle::screenHeight, "Graphics library", NULL, NULL);
+	GLFWwindow* window = glfwCreateWindow(Geometry::Rectangle::screenWidth, Geometry::Rectangle::screenHeight, "Graphics library", NULL, NULL);
 	glfwMakeContextCurrent(window);
 
     glfwSetWindowPos(window, 550 + 1900, 100);
 
-	Utility::initGLEW();
+	Geometry::Utility::initGLEW();
 	int flags;
 	
 	glGetIntegerv(GL_CONTEXT_FLAGS, &flags);
@@ -77,13 +73,13 @@ int main(int argc, const char** args) {
 	handlers::handCursor = glfwCreateStandardCursor(GLFW_HAND_CURSOR);
 
 	glfwSetCursor(window, handlers::standardCursor);
-	glViewport(0, 0, Rectangle::screenWidth, Rectangle::screenHeight);
+	glViewport(0, 0, Geometry::Rectangle::screenWidth, Geometry::Rectangle::screenHeight);
 
-	Rectangle::init();
-	Line::init();
+	Geometry::Rectangle::init();
+	Geometry::Line::init();
 	LineBreak::init();
-	Circle::init();
-	Utility::initFreeType();
+	Geometry::Circle::init();
+	Geometry::Utility::initFreeType();
 	// finished init
 	
 	w = new Window();
@@ -112,11 +108,11 @@ int main(int argc, const char** args) {
 	glfwDestroyCursor(handlers::standardCursor);
 	glfwDestroyCursor(handlers::handCursor);
 	// TODO: consider something else
-	Rectangle::destroy();
-	Line::destroy();
-	Circle::destroy();
+	Geometry::Rectangle::destroy();
+	Geometry::Line::destroy();
+	Geometry::Circle::destroy();
 	LineBreak::destroy();
-	delete Utility::textShader;
+	delete Geometry::Utility::textShader;
 	delete window;
 
     return 0;

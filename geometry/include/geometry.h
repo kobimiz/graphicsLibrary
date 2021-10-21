@@ -1,6 +1,14 @@
 #ifndef GEOMETRY_H
 #define GEOMETRY_H
 
-namespace Geometry {};
+#include "character.h"
+#include "circle.h"
+#include "color.h"
+#include "line.h"
+#include "nonInclusiveRange.h"
+#include "point.h"
+#include "rectangle.h"
+#include "shader.h"
+#include "utility.h"
 
 #endif

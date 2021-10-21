@@ -4,7 +4,7 @@
 #include <vector>
 
 #include "element.h"
-#include "point.h"
+#include "geometry.h"
 
 class Rectangle;
 class Event;
@@ -13,13 +13,13 @@ class Graph : public Element {
 private:
     // std::vector<Func> funcs;
     // TODO add custom number of points
-    std::vector<std::vector<Point>> curves;
+    std::vector<std::vector<Geometry::Point>> curves;
 public:
-    Graph(Rectangle& rec);
+    Graph(Geometry::Rectangle& rec);
     void draw() override;
     void click(Event* args) override;
 
-    static void drawCurve(std::vector<Point>& curve);
+    static void drawCurve(std::vector<Geometry::Point>& curve);
 };
 
 #endif

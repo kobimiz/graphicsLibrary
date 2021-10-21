@@ -8,7 +8,7 @@
 #include "lineBreak.h"
 
 Window::Window() {
-    body = new Container(Point(0.0f, 0.0f), Rectangle::screenWidth, Rectangle::screenHeight);
+    body = new Container(Geometry::Point(0.0f, 0.0f), Geometry::Rectangle::screenWidth, Geometry::Rectangle::screenHeight);
 }
 
 Window::~Window() {
@@ -44,7 +44,7 @@ Element* Window::getElement(tinyxml2::XMLElement* elem) {
 		if (nodeIterator) {
 			auto val = nodeIterator->ToText();
 			if (val)
-				returned->text = Text(std::move(std::string(val->Value())), Color{ 0.5f, 0.8f, 0.9f }, 0.5f);
+				returned->text = Text(std::move(std::string(val->Value())), Geometry::Color{ 0.5f, 0.8f, 0.9f }, 0.5f);
 		}
 
 		// default values
@@ -67,7 +67,7 @@ Element* Window::getElement(tinyxml2::XMLElement* elem) {
 		else
 			returned->calculateHeight();
 
-		if (color) returned->rect.color = Color(color);
+		if (color) returned->rect.color = Geometry::Color(color);
 		if (id) returned->id = id;
 	}
 	return returned;

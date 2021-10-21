@@ -4,7 +4,7 @@
 #include <string>
 
 #include "events.h"
-#include "rectangle.h"
+#include "geometry.h"
 #include "text.h"
 
 class Element {
@@ -15,7 +15,7 @@ public:
     bool isVisible;
     bool isDisabled; // can be clicked
     Events eventListeners;
-	Rectangle rect;
+	Geometry::Rectangle rect;
 
     // TODO: better
     Text text;
@@ -24,8 +24,8 @@ public:
 
 	static Element* mouseIsIn;
 
-    Element(Rectangle& rect);
-    Element(const Rectangle&& rect);
+    Element(Geometry::Rectangle& rect);
+    Element(const Geometry::Rectangle&& rect);
 
     virtual void draw();
     virtual void click(Event* args);

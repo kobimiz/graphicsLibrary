@@ -4,12 +4,12 @@
 #include "element.h"
 #include "events.h"
 
-class Rectangle;
+class Geometry::Rectangle;
 
 class Button : public Element {
 public:
 	Button();
-	Button(Rectangle& rect, Events::eventAction onclick = nullptr);
+	Button(Geometry::Rectangle& rect, Events::eventAction onclick = nullptr);
 
 	void draw() override;
 };

@@ -11,11 +11,13 @@
 #include "matrix.h"
 #include "vec3.h"
 
-unsigned int Rectangle::recVao;
-unsigned int Rectangle::recVbo;
-int Rectangle::screenWidth = 1000;
-int Rectangle::screenHeight = 800;
-Shader* Rectangle::shaderProgram;
+unsigned int Geometry::Rectangle::recVao;
+unsigned int Geometry::Rectangle::recVbo;
+int Geometry::Rectangle::screenWidth = 1000;
+int Geometry::Rectangle::screenHeight = 800;
+Geometry::Shader* Geometry::Rectangle::shaderProgram;
+
+namespace Geometry {
 
 void Rectangle::init() {
     float recVertices[] = {
@@ -180,3 +182,5 @@ void Rectangle::setXY(const Point&& p) {
 Point Rectangle::getXY() {
     return Rectangle::openglToGlfwCoords(topLeft);
 }
+
+}; // namespace Geometry

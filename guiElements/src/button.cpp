@@ -1,8 +1,8 @@
 #include "button.h"
-#include "rectangle.h"
+#include "geometry.h"
 
-Button::Button() : Element(Rectangle()) { }
-Button::Button(Rectangle& rect, Events::eventAction onclick) : Element(rect) {
+Button::Button() : Element(Geometry::Rectangle()) { }
+Button::Button(Geometry::Rectangle& rect, Events::eventAction onclick) : Element(rect) {
     if (onclick != nullptr)
         eventListeners.addEventListener("click", onclick);
 }

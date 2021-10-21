@@ -4,6 +4,12 @@
 #include "shader.h"
 #include "GL/glew.h"
 
+#include "glm/glm.hpp"
+#include "glm/gtc/matrix_transform.hpp"
+#include "glm/gtc/type_ptr.hpp"
+
+namespace Geometry {
+
 Shader* Circle::shader;
 unsigned int Circle::vao;
 unsigned int Circle::vbo;
@@ -28,9 +34,6 @@ Circle::Circle(int x, int y, int radius, const Color&& color, float thickness, b
     this->color[1] = color.rgb[1];
     this->color[2] = color.rgb[2];
 }
-#include "glm/glm.hpp"
-#include "glm/gtc/matrix_transform.hpp"
-#include "glm/gtc/type_ptr.hpp"
 
 void Circle::draw() {
     Point openglCoords(Rectangle::glfwToOpenglCoords(Point(x,y)));
@@ -92,3 +95,5 @@ void Circle::destroy() {
     glDeleteVertexArrays(1, &Circle::vao);
     glDeleteBuffers(1, &Circle::vbo);
 }
+
+}; // namespace Geometry

@@ -3,18 +3,17 @@
 
 #include <string>
 
-#include "rectangle.h"
-#include "utility.h"
+#include "geometry.h"
  
 class Text {
 public:
     std::string str;
-    Color color;
+    Geometry::Color color;
     float scale;
 
     Text();
-    Text(std::string&& str, Color&& color, float scale);
-    void draw(const Point& topLeft);
+    Text(std::string&& str, Geometry::Color&& color, float scale);
+    void draw(const Geometry::Point& topLeft);
 };
 
 #endif

@@ -2,7 +2,7 @@
 
 LineBreak* LineBreak::br;
 
-LineBreak::LineBreak() : Element(Rectangle()) { }
+LineBreak::LineBreak() : Element(Geometry::Rectangle()) { }
 
 void LineBreak::init() {
     LineBreak::br = new LineBreak();

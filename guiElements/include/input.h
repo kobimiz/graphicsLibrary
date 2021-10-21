@@ -4,7 +4,7 @@
 #include <string>
 
 #include "element.h"
-#include "line.h"
+#include "geometry.h"
 
 class Input : public Element {
 private:
@@ -13,11 +13,11 @@ public:
     // TODO think of not putting text as public
     static Input* active;
 	// TODO consider making each input a blinker of his own (maybe no?)
-	static Line blinker;
+	static Geometry::Line blinker;
 	// TODO think about making a blinker class (singleton?)
 
 	Input();
-	Input(const Point&& topLeft, int width, int height);
+	Input(const Geometry::Point&& topLeft, int width, int height);
 	void draw() override;
 	void click(Event* args) override;
 	void focus();

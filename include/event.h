@@ -3,11 +3,11 @@
 
 #include <string>
 
-#include "point.h"
+#include "geometry.h"
 
 struct Event {
     std::string name;
-    Point cursorPos;
+    Geometry::Point cursorPos;
     // TODO add keys pressed, modifiers etc
 };
 

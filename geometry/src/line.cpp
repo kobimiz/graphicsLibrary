@@ -11,13 +11,15 @@
 
 #include "GLFW/glfw3.h"
 
-unsigned int Line::vao;
-unsigned int Line::vbo;
-Shader* Line::shader;
-
 #include "glm/glm.hpp"
 #include "glm/gtc/matrix_transform.hpp"
 #include "glm/gtc/type_ptr.hpp"
+
+unsigned int Geometry::Line::vao;
+unsigned int Geometry::Line::vbo;
+Geometry::Shader* Geometry::Line::shader;
+
+namespace Geometry {
 
 Line::Line() : p1(0.0f, 0.0f), p2(0.0f, 0.0f) {
 	this->color[0] = 0.0f;
@@ -106,3 +108,5 @@ void Line::destroy() {
 float Line::toRadians(float deg) {
 	return 180.0f * deg / 3.14159f;
 }
+
+}; // namespace Geometry

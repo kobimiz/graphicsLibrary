@@ -1,5 +1,7 @@
 #include "color.h"
 
+namespace Geometry {
+
 Color::Color() {
     this->rgb[0] = 0.0f;
     this->rgb[1] = 0.0f;
@@ -35,3 +37,5 @@ Color Color::operator*(float scalar) {
 Color Color::operator+(float add) {
     return Color(add + this->rgb[0], add + this->rgb[1], add + this->rgb[2]);
 }
+
+}; // namespace Geometry

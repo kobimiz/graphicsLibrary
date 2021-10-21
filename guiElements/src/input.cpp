@@ -1,9 +1,6 @@
 #include "input.h"
-#include "utility.h"
 #include "event.h"
-#include "rectangle.h"
-#include "point.h"
-#include "line.h"
+#include "geometry.h"
 
 #include "glm/glm.hpp"
 
@@ -15,15 +12,15 @@ Input* Input::active;
 float colors[] = {
 	0.3f, 0.3f, 0.3f
 };
-Line Input::blinker(Point(0,0),Point(0,0), colors, 1);
+Geometry::Line Input::blinker(Geometry::Point(0,0),Geometry::Point(0,0), colors, 1);
 
-Input::Input() : Element(Rectangle()) {
+Input::Input() : Element(Geometry::Rectangle()) {
     // TODO think of a better solution. maybe with std::functional and lambdas
     this->textWidth = 0.0f;
     eventListeners.addEventListener("focus", Input::defaultFocus);
     eventListeners.addEventListener("click", Input::defaultClick);
 }
-Input::Input(const Point&& topLeft, int width, int height) : Element(Rectangle{topLeft, width, height}) {
+Input::Input(const Geometry::Point&& topLeft, int width, int height) : Element(Geometry::Rectangle{topLeft, width, height}) {
     // TODO think of a better solution. maybe with std::functional and lambdas
     this->textWidth = 0.0f;
     eventListeners.addEventListener("focus", Input::defaultFocus);
@@ -56,13 +53,13 @@ void Input::click(Event* args) {
 }
 void Input::pushChar(const char c) {
     text.str += c;
-    Character ch = Utility::characters[c];
+    Geometry::Character ch = Geometry::Utility::characters[c];
     this->textWidth += ch.advance * text.scale / 64.0f; // advance is 1/64th of a pixel
 }
 void Input::popChar() {
     char c = text.str.back();
     text.str.pop_back();
-    this->textWidth -= Utility::characters[c].advance * text.scale / 64.0f; // advance is 1/64th of a pixel
+    this->textWidth -= Geometry::Utility::characters[c].advance * text.scale / 64.0f; // advance is 1/64th of a pixel
 }
 
 

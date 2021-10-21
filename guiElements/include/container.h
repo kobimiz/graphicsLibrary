@@ -12,7 +12,7 @@ public:
     std::map<std::string, Element*> idMap;
 
     Container();
-    Container(Point&& topLeft, int width, int height);
+    Container(Geometry::Point&& topLeft, int width, int height);
     
     void add(Element* element);
     // Does not take into account the coordinates in element
