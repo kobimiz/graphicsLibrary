@@ -3,11 +3,8 @@
 
 #include <utility>
 
-#include "rectangle.h"
-#include "shader.h"
-#include "color.h"
-#include "point.h"
-#include "nonInclusiveRange.h"
+#include "geometry.h"
+
 #include "matrix.h"
 #include "vec3.h"
 

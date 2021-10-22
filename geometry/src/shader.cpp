@@ -4,7 +4,7 @@
 #include <iostream>
 #include <fstream>
 
-#include "shader.h"
+#include "geometry.h"
 
 // TODO: in production, make ship shaders inside executable
 

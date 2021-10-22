@@ -1,9 +1,6 @@
 #include <cmath>
 
-#include "line.h"
-#include "rectangle.h"
-#include "circle.h"
-#include "shader.h"
+#include "geometry.h"
 
 #include "matrix.h"
 #include "vec3.h"

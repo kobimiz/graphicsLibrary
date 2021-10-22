@@ -8,10 +8,8 @@
 
 #include <iostream>
 
-#include "utility.h"
-#include "character.h"
-#include "rectangle.h"
-#include "shader.h"
+#include "geometry.h"
+
 #include "glfwHandlers.h"
 
 std::map<char, Geometry::Character> Geometry::Utility::characters;

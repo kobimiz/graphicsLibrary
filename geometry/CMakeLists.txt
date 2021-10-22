@@ -20,7 +20,10 @@ add_library(geometry SHARED
     src/events.cpp
     src/nonInclusiveRange.cpp
     src/utility.cpp
-    src/geometry.cpp)
+    src/geometry.cpp
+    src/geometry3d.cpp
+    src/cube.cpp
+    src/rubiksCube.cpp) # TODO this isnt part of the library
 
 target_link_libraries(geometry ${GLEW_LIB} ${FREETYPE_LIB} ${OPENGL_LIB} graphicsMath)
 

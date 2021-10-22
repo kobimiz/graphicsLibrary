@@ -14,6 +14,7 @@
 #include <string>
 
 #include "geometry.h"
+#include "geometry3d.h"
 #include "guiElements.h"
 #include "glfwHandlers.h"
 
@@ -66,6 +67,8 @@ int main(int argc, const char** args) {
 	
 	w->body->findById("helloContainer")->eventListeners.addEventListener("click", reParseClick);
 
+	Geometry::initGeometry3d();
+	Geometry::Cube cube;
 	while (!glfwWindowShouldClose(window)) {
 		glClearColor(0.1f, 0.1f, 0.1f, 1.0f);
 		glClear(GL_COLOR_BUFFER_BIT | GL_STENCIL_BUFFER_BIT);
@@ -73,6 +76,7 @@ int main(int argc, const char** args) {
 		// TODO change coord system of text from bottom left to top left
 		// drawing gui
 		w->body->draw();
+		cube.draw();
 
 		glfwSwapBuffers(window);
 		glfwPollEvents(); // I AM HERE poll events blocks rendering while resizing.

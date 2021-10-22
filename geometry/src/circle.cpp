@@ -1,7 +1,4 @@
-#include "circle.h"
-#include "point.h"
-#include "rectangle.h"
-#include "shader.h"
+#include "geometry.h"
 #include "GL/glew.h"
 
 #include "glm/glm.hpp"
