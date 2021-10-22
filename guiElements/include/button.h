@@ -4,8 +4,6 @@
 #include "element.h"
 #include "events.h"
 
-class Geometry::Rectangle;
-
 namespace GuiElements {
 
 class Button : public Element {

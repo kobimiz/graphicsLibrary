@@ -11,4 +11,12 @@
 #include "shader.h"
 #include "utility.h"
 
+namespace Geometry {
+
+void initGeometry();
+
+void destroyGeometry();
+
+}; // namespace Geometry
+
 #endif

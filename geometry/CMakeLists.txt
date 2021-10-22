@@ -19,7 +19,8 @@ add_library(geometry SHARED
     src/shader.cpp
     src/events.cpp
     src/nonInclusiveRange.cpp
-    src/utility.cpp)
+    src/utility.cpp
+    src/geometry.cpp)
 
 target_link_libraries(geometry ${GLEW_LIB} ${FREETYPE_LIB} ${OPENGL_LIB} graphicsMath)
 

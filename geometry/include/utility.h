@@ -7,6 +7,8 @@
 
 #include "character.h"
 
+class GLFWwindow;
+
 namespace Geometry {
 
 class Shader;
@@ -17,8 +19,9 @@ namespace Utility {
 	extern Shader* textShader;
 
     void initFreeType();
-    void initGLEW();
+    void initGLEW(bool enableDebug);
     void initGLFW();
+    void setGLFWCallbacks(GLFWwindow* window);
     void renderText(std::string text, float x, float y, float scale, glm::vec3 color);
 }
 

@@ -40,25 +40,11 @@ int main(int argc, const char** args) {
 
 	GLFWwindow* window = glfwCreateWindow(Geometry::Rectangle::screenWidth, Geometry::Rectangle::screenHeight, "Graphics library", NULL, NULL);
 	glfwMakeContextCurrent(window);
-
     glfwSetWindowPos(window, 550 + 1900, 100);
 
-	Geometry::Utility::initGLEW();
-	int flags;
-	
-	glGetIntegerv(GL_CONTEXT_FLAGS, &flags);
-	if (flags & GL_CONTEXT_FLAG_DEBUG_BIT) {
-		glEnable(GL_DEBUG_OUTPUT);
-		glEnable(GL_DEBUG_OUTPUT_SYNCHRONOUS);
-		glDebugMessageCallback(handlers::glDebugOutput, nullptr);
-		glDebugMessageControl(GL_DONT_CARE, GL_DONT_CARE, GL_DONT_CARE, 0, nullptr, GL_TRUE);
-	}
+	Geometry::Utility::initGLEW(true);
+	Geometry::Utility::setGLFWCallbacks(window);
 
-	glfwSetKeyCallback(window, handlers::key_callback);
-	glfwSetCursorPosCallback(window, handlers::cursorPositionCallback);
-	glfwSetMouseButtonCallback(window, handlers::mouseButtonCallback);
-	glfwSetFramebufferSizeCallback(window, handlers::window_resize_callback);
-	glfwSetCharCallback(window, handlers::character_callback);
 	// TODO find a better solution
 	handlers::standardCursor = glfwCreateStandardCursor(GLFW_ARROW_CURSOR);
 	handlers::handCursor = glfwCreateStandardCursor(GLFW_HAND_CURSOR);
@@ -66,13 +52,10 @@ int main(int argc, const char** args) {
 	glfwSetCursor(window, handlers::standardCursor);
 	glViewport(0, 0, Geometry::Rectangle::screenWidth, Geometry::Rectangle::screenHeight);
 
-	Geometry::Rectangle::init();
-	Geometry::Line::init();
+	Geometry::initGeometry();
 	GuiElements::LineBreak::init();
-	Geometry::Circle::init();
-	Geometry::Utility::initFreeType();
-	// finished init
-	
+
+	// finished setup
 	w = new GuiElements::Window();
 	glfwSetWindowUserPointer(window, w);
 	w->fromDoc("document.xml");
@@ -99,12 +82,10 @@ int main(int argc, const char** args) {
 	glfwDestroyCursor(handlers::standardCursor);
 	glfwDestroyCursor(handlers::handCursor);
 	// TODO: consider something else
-	Geometry::Rectangle::destroy();
-	Geometry::Line::destroy();
-	Geometry::Circle::destroy();
+	Geometry::destroyGeometry();
 	GuiElements::LineBreak::destroy();
 	delete Geometry::Utility::textShader;
-	delete window;
+	glfwDestroyWindow(window);
 
     return 0;
 }

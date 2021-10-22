@@ -12,6 +12,7 @@
 #include "character.h"
 #include "rectangle.h"
 #include "shader.h"
+#include "glfwHandlers.h"
 
 std::map<char, Geometry::Character> Geometry::Utility::characters;
 unsigned int Geometry::Utility::textVao, Geometry::Utility::textVbo;
@@ -88,15 +89,34 @@ namespace Utility {
         Utility::textShader->setMat4("projection", glm::value_ptr(projection));
     }
 
-    void initGLEW() {
+    void initGLEW(bool enableDebug) {
         if (glewInit() != GLEW_OK)
             std::cout << "Failed to initialize glew" << std::endl;
+
+        if (!enableDebug) return;
+
+        int flags;
+        glGetIntegerv(GL_CONTEXT_FLAGS, &flags);
+        if (flags & GL_CONTEXT_FLAG_DEBUG_BIT) {
+            glEnable(GL_DEBUG_OUTPUT);
+            glEnable(GL_DEBUG_OUTPUT_SYNCHRONOUS);
+            glDebugMessageCallback(handlers::glDebugOutput, nullptr);
+            glDebugMessageControl(GL_DONT_CARE, GL_DONT_CARE, GL_DONT_CARE, 0, nullptr, GL_TRUE);
+        }
     }
 
     void initGLFW() {
         glfwInit();
         glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 4);
         glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 3);
+    }
+
+    void setGLFWCallbacks(GLFWwindow* window) {
+        glfwSetKeyCallback(window, handlers::key_callback);
+        glfwSetCursorPosCallback(window, handlers::cursorPositionCallback);
+        glfwSetMouseButtonCallback(window, handlers::mouseButtonCallback);
+        glfwSetFramebufferSizeCallback(window, handlers::window_resize_callback);
+        glfwSetCharCallback(window, handlers::character_callback);
     }
 
     void renderText(std::string text, float x, float y, float scale, glm::vec3 color) {
