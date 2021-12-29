@@ -10,6 +10,7 @@
 namespace handlers {
     GLFWcursor* standardCursor;
     GLFWcursor* handCursor;
+    bool isClicked;
 
     struct PosCallbackArgs {
         double xpos;
@@ -22,6 +23,7 @@ namespace handlers {
         double ypos;
         bool* clicked;
     };
+    
     void cursorPositionCallback(GLFWwindow* window, double xpos, double ypos) {
         bool found = false;
         GuiElements::Window* w = (GuiElements::Window*)glfwGetWindowUserPointer(window);
@@ -51,6 +53,25 @@ namespace handlers {
             GuiElements::Element::mouseIsIn = nullptr;
             glfwSetCursor(window, standardCursor);
         }
+
+
+        // camera
+        if (isClicked) {
+            w->lastX = w->currX;
+            w->lastY = w->currY;
+
+            w->currX = xpos;
+            w->currY = ypos;
+
+            // try to figure out when mouse reset happend
+            if (std::abs(w->currX - w->lastX) <= 200.0f && std::abs(w->currY - w->lastY) <= 200.0f) {
+                float accelerationFactor = 1.4f;
+                w->prevRotationXMag = w->rotationXMag;
+                w->prevRotationYMag = w->rotationYMag;
+                w->rotationXMag += (w->currX - w->lastX) / 800.0f * accelerationFactor;
+                w->rotationYMag += (w->currY - w->lastY) / 1000.0f * accelerationFactor;
+            }
+        }
     }
 
     void key_callback(GLFWwindow* window, int key, int scancode, int action, int mods) {
@@ -67,10 +88,10 @@ namespace handlers {
     void mouseButtonCallback(GLFWwindow* window, int button, int action, int mods) {
         double xpos, ypos; // TODO: consider making int, to save casting
         glfwGetCursorPos(window, &xpos, &ypos);
+        GuiElements::Window* w = (GuiElements::Window*)glfwGetWindowUserPointer(window);
         if (button == GLFW_MOUSE_BUTTON_LEFT && action == GLFW_PRESS) {
             // TODO add a "body" element that has its own click listner that loses focus from inputs instead of this
             bool clicked = false;
-            GuiElements::Window* w = (GuiElements::Window*)glfwGetWindowUserPointer(window);
             MouseButtonCallbackArgs args = {
                 xpos, ypos, &clicked
             };
@@ -88,6 +109,15 @@ namespace handlers {
             if (!clicked)
                 if (GuiElements::Input::active != nullptr)
                     GuiElements::Input::active->loseFocus();
+
+            // for camera
+            isClicked = true;
+        } else if (button == GLFW_MOUSE_BUTTON_LEFT && action == GLFW_RELEASE) {
+            isClicked = false;
+            w->currX = 0.0f;
+            w->currY = 0.0f;
+            w->lastX = 0.0f;
+            w->lastY = 0.0f;
         }
     }
     void window_resize_callback(GLFWwindow* window, int width, int height) {

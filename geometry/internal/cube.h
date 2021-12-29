@@ -6,7 +6,7 @@ namespace Geometry {
 class Shader;
 
 class Cube {
-private:
+protected:
     static unsigned int cubeVao;
     static unsigned int cubeVbo;
     static Shader* shaderProgram;

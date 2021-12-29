@@ -31,32 +31,36 @@ Circle::Circle(int x, int y, int radius, const Color&& color, float thickness, b
     this->color[1] = color.rgb[1];
     this->color[2] = color.rgb[2];
 }
+#include <GLFW/glfw3.h>
 
 void Circle::draw() {
     Point openglCoords(Rectangle::glfwToOpenglCoords(Point(x,y)));
-    float scaleX = (float) 2.0 * radius / Rectangle::screenWidth;
-    float scaleY = (float) 2.0 * radius / Rectangle::screenHeight;
+    float scaleX = 2.0f * radius / Rectangle::screenWidth;
+    float scaleY = 2.0f * radius / Rectangle::screenHeight;
 
-    float translateX = (openglCoords.x + radius / Rectangle::screenWidth + 0.5 * scaleX) / scaleX;
-    float translateY = (openglCoords.y + radius / Rectangle::screenHeight - 0.5 * scaleY) / scaleY;
-
-    glm::mat4 scale = glm::scale(glm::identity<glm::mat4>(), glm::vec3(scaleX, scaleY, 1.0f));
-    glm::mat4 trans = glm::translate(scale, glm::vec3(openglCoords.x, openglCoords.y, 0.0f));
+    float translateX = (2.0f * x) / Rectangle::screenWidth - 1.0f;
+    float translateY = (2.0f * y) / Rectangle::screenHeight - 1.0f;
 
     float trans2[] = {
-        scaleX, 0.0f  , 0.0f, scaleX * translateX,
-        0.0f  , scaleY, 0.0f, scaleY * translateY,
+        scaleX, 0.0f  , 0.0f, translateX,
+        0.0f  , scaleY, 0.0f, translateY,
         0.0f  , 0.0f  , 1.0f, 0.0f,
         0.0f  , 0.0f  , 0.0f, 1.0f
     };
 
+    glm::mat4 trans = glm::scale(glm::mat4(1.0f), glm::vec3(scaleX, scaleY, 1.0f));
+    // I AM HERE: to learn how projection works
+    glm::mat4 translate = glm::translate(glm::mat4(1.0f), glm::vec3(translateX, translateY, 0.0f));
+    translate = glm::transpose(translate);
+
+    trans = trans * translate;
+
 	glBindVertexArray(Circle::vao);
     Circle::shader->use();
-    // Circle::shader->setMat4("trans", glm::value_ptr(trans));
-    Circle::shader->setMat4("trans", trans2);
+    Circle::shader->setMat4("trans", glm::value_ptr(trans));
     Circle::shader->setVec3("color", color);
     // translate to bottom left, look at cricle.frag for explanation
-    float center[] = { x + Rectangle::screenWidth / 2.0f, y + Rectangle::screenHeight / 2.0f };
+    float center[] = { (float)x, (float)y };
     Circle::shader->setVec2("center", center);
     Circle::shader->setInt("radius", radius);
     Circle::shader->setBool("isFilled", isFilled);
@@ -67,12 +71,12 @@ void Circle::draw() {
 
 void Circle::init() {
     float recVertices[] = {
-        -1.0f, -1.0f,  0.0f,
-         1.0f, -1.0f,  0.0f,
-         1.0f,  1.0f,  0.0f,
-         1.0f,  1.0f,  0.0f,
-        -1.0f,  1.0f,  0.0f,
-        -1.0f, -1.0f,  0.0f
+        -1.0f, -1.0f,  0.5f,
+         1.0f, -1.0f,  0.5f,
+         1.0f,  1.0f,  0.5f,
+         1.0f,  1.0f,  0.5f,
+        -1.0f,  1.0f,  0.5f,
+        -1.0f, -1.0f,  0.5f
     };
     glGenVertexArrays(1, &Circle::vao);
     glGenBuffers(1, &Circle::vbo);

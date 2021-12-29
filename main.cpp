@@ -18,6 +18,8 @@
 #include "guiElements.h"
 #include "glfwHandlers.h"
 
+#include "geometry/internal/rubiksCube.h"
+
 GuiElements::Window* w;
 
 void reParse(std::string&& docPath) {
@@ -68,20 +70,36 @@ int main(int argc, const char** args) {
 	w->body->findById("helloContainer")->eventListeners.addEventListener("click", reParseClick);
 
 	Geometry::initGeometry3d();
-	Geometry::Cube cube;
+	// Geometry::Cube cube;
+	RubiksCube::init();
+	RubiksCube cube(window);
+	cube.colorFace(RC_RIGHT, RC_BLUE);
+	cube.colorFace(RC_UP, RC_YELLOW);
+	cube.colorFace(RC_FRONT, RC_ORANGE);
+	cube.colorFace(RC_BACK, RC_RED);
+	cube.colorFace(RC_DOWN, RC_WHITE);
+	cube.colorFace(RC_LEFT, RC_GREEN);
+	
+	Geometry::Circle circ(400, 400, 10.0f, Geometry::Color(1.0f, 0.0f, 0.5f), 2.0f, true);
+
 	while (!glfwWindowShouldClose(window)) {
 		glClearColor(0.1f, 0.1f, 0.1f, 1.0f);
-		glClear(GL_COLOR_BUFFER_BIT | GL_STENCIL_BUFFER_BIT);
+		glClear(GL_COLOR_BUFFER_BIT | GL_STENCIL_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
 		// TODO change coord system of text from bottom left to top left
 		// drawing gui
+		// TODO something about this
+		glDisable(GL_DEPTH_TEST);
 		w->body->draw();
-		cube.draw();
+		// cube.draw();
+		circ.draw();
 
 		glfwSwapBuffers(window);
 		glfwPollEvents(); // I AM HERE poll events blocks rendering while resizing.
 		// can be fixed by threading
 	}
+
+	RubiksCube::destroy();
 
 	glfwDestroyCursor(handlers::standardCursor);
 	glfwDestroyCursor(handlers::handCursor);

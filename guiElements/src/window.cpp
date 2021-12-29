@@ -11,6 +11,10 @@ namespace GuiElements {
 
 Window::Window() {
     body = new Container(Geometry::Point(0.0f, 0.0f), Geometry::Rectangle::screenWidth, Geometry::Rectangle::screenHeight);
+	rotationXMag = 0.0f;
+	rotationYMag = 0.0f;
+	prevRotationXMag = 0.0f;
+	prevRotationYMag = 0.0f;
 }
 
 Window::~Window() {

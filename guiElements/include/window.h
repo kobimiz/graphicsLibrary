@@ -14,6 +14,11 @@ private:
     static void addDoc(tinyxml2::XMLNode& doc, Container* body);
     
 public:
+    float currX,currY;
+    float lastX,lastY;
+    float rotationXMag, rotationYMag;
+    float prevRotationXMag, prevRotationYMag;
+
     Container* body;
     Window();
     ~Window();
